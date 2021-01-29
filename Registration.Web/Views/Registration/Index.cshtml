@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Registration.Web.Models.RegistrationViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Registration List</h2>
+
+    </div>
+    <div class="col-md-4">
+        @using (Html.BeginForm("Search", "Registration", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+            @Html.TextBox("search", null, new { id = "search", @class = "form-control" })
+        }
+
+    </div>
+
+    <div class="col-md-2">
+        @Html.ActionLink("Create New", "Create", new { controller = "Registration" }, new { @class = "btn btn-primary btn-block" })
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    DOB
+                </th>
+                <th>
+                    Profession
+                </th>
+                <th>
+                    Locality
+                </th>
+                <th>
+                    NoOfGuest
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Profession)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Locality)
+                    </td>
+
+                    <th>
+                        @Html.DisplayFor(modelItem => item.NoOfGuest)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </th>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-log-in" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+
+    </div>
+</div>
+
